@@ -327,6 +327,12 @@
             gap: 16px;
         }
 
+        .disclaimer {
+            font-size: 13px;
+            color: #1D3FBB;
+            text-align: center;
+        }
+
         /* フッターコンテナ：ページ最下部に配置 */
         .footer {
             padding: 24px 0; /* 上下に24pxのゆとりある余白を設け、窮屈さを排除 */
@@ -396,6 +402,10 @@
                 grid-template-columns: repeat(2, 1fr);
                 gap: 16px;
             }
+
+            .disclaimer {
+                font-size: 11px;
+            }
         }
     </style>
 </head>
@@ -462,6 +472,7 @@
                     <button id="resetAndTopBtn" class="btn-secondary" onclick="handleResetAndTop()">
                         <i data-lucide="rotate-ccw"></i> リセットしてトップに戻る
                     </button>
+                    <p class="disclaimer">※ 本ツールはLINEスタンプの審査通過を保証するものではありません。</p>
                 </div>
             </div>
         </div>
