@@ -124,6 +124,17 @@
             font-weight: 700;
         }
 
+        .file-drop-area .file-sub-label {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-top: -8px;
+        }
+
+        .file-drop-area.dragging {
+            opacity: 0.8;
+            border: 2px dashed #FFFFFF;
+        }
+
         .file-drop-area .file-name {
             font-size: 14px;
             opacity: 0.8;
@@ -381,6 +392,10 @@
             input[type="number"] {
                 width: 60%;
             }
+            .result-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
         }
     </style>
 </head>
@@ -397,14 +412,15 @@
             <!-- Step 1 -->
             <div class="step-section">
                 <h2 class="step-title"><i data-lucide="image"></i> 1. 画像を選択</h2>
-                <div class="file-drop-area" onclick="document.getElementById('splitInput').click()">
+                <div class="file-drop-area" id="dropZone" onclick="document.getElementById('splitInput').click()">
                     <i data-lucide="upload-cloud" class="icon"></i>
                     <div class="file-label">クリックして画像ファイルを選択</div>
+                    <div class="file-sub-label">または、ここにドラッグ＆ドロップ（PNG / JPG）</div>
                     <div id="previewContainer" class="preview-container" style="display: none;">
                         <img id="selectedImagePreview" src="" alt="選択されたプレビュー画像">
                     </div>
                     <div id="fileNameDisplay" class="file-name">未選択</div>
-                    <input type="file" id="splitInput" accept="image/*" onchange="handleFileChange(event)">
+                    <input type="file" id="splitInput" accept="image/png, image/jpeg" onchange="handleFileChange(event)">
                 </div>
             </div>
 
@@ -414,19 +430,24 @@
                 <div class="grid-inputs">
                     <div class="input-group">
                         <span>タテ (Rows)</span>
-                        <input type="number" id="rows" value="2" min="1">
+                        <input type="number" id="rows" value="3" min="1">
                     </div>
                     <div class="input-group">
                         <span>ヨコ (Cols)</span>
-                        <input type="number" id="cols" value="2" min="1">
+                        <input type="number" id="cols" value="3" min="1">
                     </div>
                 </div>
             </div>
 
             <!-- Action Button -->
-            <button id="splitBtn" class="btn-primary" onclick="handleSplit()">
-                <i data-lucide="scissors"></i> 分割を実行する
-            </button>
+            <div class="actions-group">
+                <button id="splitBtn" class="btn-primary" onclick="handleSplit()">
+                    <i data-lucide="scissors"></i> 分割を実行する
+                </button>
+                <button id="resetBtn" class="btn-secondary" onclick="handleReset()">
+                    <i data-lucide="rotate-ccw"></i> リセットする
+                </button>
+            </div>
         </div>
 
         <!-- Results Area -->
@@ -438,8 +459,8 @@
                     <button id="splitZipBtn" class="btn-primary" style="display: none;" onclick="downloadZip()">
                         <i data-lucide="package"></i> まとめてZIP保存
                     </button>
-                    <button id="resetBtn" class="btn-secondary" onclick="handleReset()">
-                        <i data-lucide="rotate-ccw"></i> リセットする
+                    <button id="resetAndTopBtn" class="btn-secondary" onclick="handleResetAndTop()">
+                        <i data-lucide="rotate-ccw"></i> リセットしてトップに戻る
                     </button>
                 </div>
             </div>
@@ -460,6 +481,29 @@
             const pad = (num) => String(num).padStart(2, '0');
             return `${now.getFullYear()}${pad(now.getMonth() + 1)}${pad(now.getDate())}-${pad(now.getHours())}${pad(now.getMinutes())}${pad(now.getSeconds())}`;
         }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const dropZone = document.getElementById('dropZone');
+            const splitInput = document.getElementById('splitInput');
+
+            dropZone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropZone.classList.add('dragging');
+            });
+
+            dropZone.addEventListener('dragleave', () => {
+                dropZone.classList.remove('dragging');
+            });
+
+            dropZone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropZone.classList.remove('dragging');
+                if (e.dataTransfer && e.dataTransfer.files.length > 0) {
+                    splitInput.files = e.dataTransfer.files;
+                    handleFileChange({ target: splitInput });
+                }
+            });
+        });
 
         function handleFileChange(event) {
             const file = event.target.files[0];
@@ -565,14 +609,19 @@
             document.getElementById('fileNameDisplay').textContent = '未選択';
             document.getElementById('previewContainer').style.display = 'none';
             document.getElementById('selectedImagePreview').src = '';
-            document.getElementById('rows').value = 2;
-            document.getElementById('cols').value = 2;
+            document.getElementById('rows').value = 3;
+            document.getElementById('cols').value = 3;
             document.getElementById('resultArea').style.display = 'none';
             document.getElementById('splitResults').innerHTML = '';
             document.getElementById('splitZipBtn').style.display = 'none';
 
             splitBlobs.forEach(b => URL.revokeObjectURL(b.blob));
             splitBlobs = [];
+        }
+
+        function handleResetAndTop() {
+            handleReset();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     </script>
 
