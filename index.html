@@ -548,6 +548,7 @@
             }
 
             results.innerHTML = '';
+            splitBlobs.forEach(b => URL.revokeObjectURL(b.url));
             splitBlobs = [];
             document.getElementById('splitZipBtn').style.display = 'none';
 
@@ -569,7 +570,7 @@
                             count++;
                             const url = URL.createObjectURL(blob);
                             const name = `${dateStr}_${y + 1}-${x + 1}.png`;
-                            splitBlobs.push({ blob: blob, name: name });
+                            splitBlobs.push({ blob: blob, name: name, url: url });
 
                             const item = document.createElement('div');
                             item.className = 'result-item';
@@ -626,7 +627,7 @@
             document.getElementById('splitResults').innerHTML = '';
             document.getElementById('splitZipBtn').style.display = 'none';
 
-            splitBlobs.forEach(b => URL.revokeObjectURL(b.blob));
+            splitBlobs.forEach(b => URL.revokeObjectURL(b.url));
             splitBlobs = [];
         }
 
