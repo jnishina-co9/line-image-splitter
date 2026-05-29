@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IMAGE SPLITTER — 仕様書</title>
+<title>IMAGE SPLITTER — プロダクト仕様書</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
@@ -546,6 +546,20 @@
 
 
 
+  .demo-video-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 16px auto 0 auto;
+  }
+
+  .demo-video-wrapper video {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 1px solid var(--color-border);
+  }
+
   /* =============================================
      PAGE FOOTER
   ============================================= */
@@ -730,7 +744,7 @@
   <aside class="sidebar" id="sidebar" role="navigation" aria-label="目次">
     <div class="sidebar__brand">
       <a href="#" class="sidebar__app-name">IMAGE SPLITTER</a>
-      <div class="sidebar__doc-type">仕様書 — Specification v1.0</div>
+      <div class="sidebar__doc-type">プロダクト仕様書 v1.0</div>
     </div>
 
     <nav class="sidebar__nav">
@@ -775,7 +789,7 @@
 
     <!-- PAGE HEADER -->
     <header class="page-header">
-      <div class="page-header__eyebrow">Specification Document</div>
+      <div class="page-header__eyebrow">PRODUCT SPECIFICATION</div>
       <h1 class="page-header__title">IMAGE SPLITTER</h1>
       <div class="page-header__subtitle">LINEスタンプ特化型・画像分割ツール</div>
       <div class="page-header__meta">
@@ -901,6 +915,15 @@
               <p><strong>背景：</strong>Instagramのグリッド投稿やゲーム開発で使うスプライト画像を作成するために、画像をきれいに分割したいというニーズが存在します。</p>
               <p><strong>課題：</strong>既存のオンライン画像分割サービスには、外部サーバーへの画像アップロードによるプライバシー漏洩リスクや無料版での画質劣化、有料プランが必要などの課題があります。</p>
               <p><strong>解決策：</strong>外部サーバーへ画像を一切送信せず、ユーザーのブラウザ上だけで処理を完結させることで、「完全なプライバシー保護」「高画質な切り出し」「完全無料」を同時に実現しました。</p>
+            </div>
+          </div>
+
+          <div class="spec-block" style="margin-top: 32px;">
+            <div class="spec-block__label">デモ動画</div>
+            <div class="demo-video-wrapper">
+              <video src="demo.mp4" preload="metadata" autoplay loop muted playsinline controls>
+                お使いのブラウザは動画の再生に対応していません。
+              </video>
             </div>
           </div>
 
