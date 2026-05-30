@@ -431,9 +431,11 @@
     border-left: 4px solid var(--color-text);
   }
 
-  /* アコーディオンの直後に配置される縦線ブロックに上部余白を追加（gap:16pxと合算して48pxに調整） */
+  /* 先行要素（アコーディオン群、アプリカード等）の直後のブロックやグリッドには自動で上部余白を付与 */
   .accordion + .spec-block,
-  .accordion + .block-grid {
+  .accordion + .block-grid,
+  .app-card + .spec-block,
+  .app-card + .block-grid {
     margin-top: 32px;
   }
 
@@ -750,7 +752,7 @@
     <nav class="sidebar__nav">
       <div class="nav__section-label">Overview</div>
       <a class="nav__item" href="#sec-0" id="nav-0">
-        <span class="nav__item-num">00</span>Quick Summary
+        <span class="nav__item-num">00</span>基本情報
       </a>
 
       <div class="nav__section-label">Requirements</div>
@@ -776,8 +778,10 @@
       <a class="nav__item" href="#sec-6" id="nav-6">
         <span class="nav__item-num">06</span>処理フロー
       </a>
+
+      <div class="nav__section-label">Conclusion</div>
       <a class="nav__item" href="#sec-7" id="nav-7">
-        <span class="nav__item-num">07</span>今後の改善案
+        <span class="nav__item-num">07</span>おわりに
       </a>
     </nav>
 
@@ -821,7 +825,7 @@
       <section class="spec-section" id="sec-0" aria-labelledby="title-0">
         <div class="section-header">
           <span class="section-num">00</span>
-          <h2 class="section-title" id="title-0">Quick Summary</h2>
+          <h2 class="section-title" id="title-0">基本情報</h2>
         </div>
 
         <div class="app-card">
@@ -918,7 +922,7 @@
             </div>
           </div>
 
-          <div class="spec-block" style="margin-top: 32px;">
+          <div class="spec-block">
             <div class="spec-block__label">デモ動画</div>
             <div class="demo-video-wrapper">
               <video src="demo.mp4" preload="metadata" autoplay loop muted playsinline controls>
@@ -992,8 +996,7 @@
           <div class="spec-block spec-block--constraint">
             <div class="spec-block__label">ご利用時の注意点</div>
             <ul>
-              <li>Canvas APIはCORS制限（他サイトの画像を勝手に加工できない仕組み）あり（外部URL画像は不可）</li>
-              <li>大容量画像（数十MB超）はブラウザのメモリ制限に注意（画面が固まったり強制終了したりするため、数MB程度への縮小を推奨）</li>
+              <li>数十MB超の大容量画像はメモリ制限でフリーズする恐れがあるため、数MB程度への縮小を推奨</li>
             </ul>
           </div>
         </div>
@@ -1266,41 +1269,18 @@
       </section>
 
       <!-- ================================
-           SECTION 7: 今後の改善案
+           SECTION 7: おわりに
       ================================ -->
       <section class="spec-section" id="sec-7" aria-labelledby="title-7">
         <div class="section-header">
           <span class="section-num">07</span>
-          <h2 class="section-title" id="title-7">今後の改善案</h2>
+          <h2 class="section-title" id="title-7">おわりに</h2>
         </div>
         <div class="section-body">
-
-          <div class="accordion is-open" id="acc-7-1">
-            <button class="accordion__trigger" aria-expanded="true" aria-controls="body-7-1">
-              <div class="accordion__trigger-left">
-                <span class="accordion__tag accordion__tag--future">将来</span>
-                <span class="accordion__title">分割線のプレビュー表示機能</span>
-              </div>
-              <svg class="accordion__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-            </button>
-            <div class="accordion__body" id="body-7-1">
-              <p>アップロードした画像の上に、指定した分割数に応じた格子線がリアルタイムで重なって表示され、実行前に分割イメージが把握できる機能の搭載を検討しています。</p>
-            </div>
+          <div style="background: var(--color-base); padding: 32px 24px; line-height: 2.0;">
+            <p style="margin-bottom: 16px;">「ユーザーが本当に安心して使えるツール」を目指し、プライバシー保護と使いやすさにこだわって開発しました。サーバーに画像を送信しない完全クライアントサイド処理の構成にしたことで、安心感と軽快な動作を両立できたと感じています。</p>
+            <p>また、Canvas APIやJSZipなどを活用し、ブラウザの標準機能だけでも高度な画像処理やファイル操作が可能であることを実践的に学びました。フロントエンド技術の組み合わせと工夫次第で、ユーザーに価値を届けられる実用的なツールが作れるという大きな自信に繋がりました。</p>
           </div>
-
-          <div class="accordion" id="acc-7-2">
-            <button class="accordion__trigger" aria-expanded="false" aria-controls="body-7-2">
-              <div class="accordion__trigger-left">
-                <span class="accordion__tag accordion__tag--future">将来</span>
-                <span class="accordion__title">出力画像フォーマットの追加</span>
-              </div>
-              <svg class="accordion__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-            </button>
-            <div class="accordion__body" id="body-7-2">
-              <p>現在は高画質なPNG形式のみの対応ですが、ファイルサイズを抑えられるJPEG形式やWebP形式への変換保存機能の導入も視野に入れています。</p>
-            </div>
-          </div>
-
         </div>
       </section>
 
