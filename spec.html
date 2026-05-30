@@ -1323,21 +1323,41 @@
   // ======================================================
   // SIDEBAR ACTIVE HIGHLIGHT
   // ======================================================
-  const sections = document.querySelectorAll('.spec-section[id]');
+  const sections = Array.from(document.querySelectorAll('.spec-section[id]'));
   const navItems = document.querySelectorAll('.nav__item[id]');
 
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const id = entry.target.id.replace('sec-', '');
-        navItems.forEach(item => item.classList.remove('is-active'));
-        const active = document.getElementById('nav-' + id);
-        if (active) active.classList.add('is-active');
-      }
-    });
-  }, { rootMargin: '-20% 0px -70% 0px' });
+  function updateActiveSection() {
+    let currentId = '';
+    const scrollY = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const docHeight = document.documentElement.scrollHeight;
 
-  sections.forEach(s => observer.observe(s));
+    // ページ下端の場合は強制的に最後のセクションをアクティブ化
+    if (scrollY + windowHeight >= docHeight - 5) {
+      if (sections.length > 0) {
+        currentId = sections[sections.length - 1].id.replace('sec-', '');
+      }
+    } else {
+      // 画面上部から少し下の位置（オフセット）を基準に現在のセクションを判定
+      const offset = 150;
+      for (const section of sections) {
+        if (section.offsetTop - offset <= scrollY) {
+          currentId = section.id.replace('sec-', '');
+        } else {
+          break; // 以降のセクションはまだ到達していない
+        }
+      }
+    }
+
+    if (currentId) {
+      navItems.forEach(item => item.classList.remove('is-active'));
+      const active = document.getElementById('nav-' + currentId);
+      if (active) active.classList.add('is-active');
+    }
+  }
+
+  window.addEventListener('scroll', updateActiveSection);
+  updateActiveSection();
 
   // ======================================================
   // MOBILE UI CONTROL
