@@ -1,0 +1,419 @@
+/* 
+         * Minimal Web App Design System
+         * Colors: Base (#FFFFFF), Main (#00c9a7), Accent (#EFEFEF)
+         * Radii: 0px, Shadows: none, Borders: none
+         */
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #FFFFFF;
+            color: #00c9a7;
+            margin: 0;
+            padding: 48px 24px 0;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 48px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        h1 {
+            font-family: 'Outfit', 'Noto Sans JP', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            margin: 0;
+            color: #00c9a7;
+            letter-spacing: 0.05em;
+        }
+
+        .subtitle {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #00c9a7;
+            letter-spacing: 0.1em;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto 48px;
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .card {
+            background-color: #EFEFEF;
+            padding: 48px;
+            border: none;
+            border-radius: 0px;
+            box-shadow: none;
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        /* Step sections use separate gray panels, like the reference page. */
+        .card:has(> .step-section) {
+            background: transparent;
+            padding: 0;
+            gap: 32px;
+        }
+
+        .step-section {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            background-color: #EFEFEF;
+            padding: 48px;
+        }
+
+        .step-title {
+            font-family: 'Outfit', 'Noto Sans JP', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #00c9a7;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* ファイル入力エリア */
+        .file-drop-area {
+            background-color: #00c9a7;
+            color: #FFFFFF;
+            padding: 48px 24px;
+            text-align: center;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            box-sizing: border-box;
+        }
+
+        .file-drop-area:hover {
+            opacity: 0.9;
+        }
+
+        .file-drop-area input[type="file"] {
+            display: none;
+        }
+
+        .file-drop-area .icon {
+            width: 48px;
+            height: 48px;
+            color: #FFFFFF;
+        }
+
+        .file-drop-area .file-label {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .file-drop-area .file-sub-label {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-top: -8px;
+        }
+
+        .file-drop-area.dragging {
+            opacity: 0.8;
+            border: 2px dashed #FFFFFF;
+        }
+
+        .file-drop-area .file-name {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-top: 8px;
+        }
+
+        /* 選択画像プレビューエリア */
+        .preview-container {
+            width: 100%;
+            margin-top: 24px;
+            margin-bottom: 16px;
+            background-color: transparent; /* コンテナ全体の白背景を解除 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+        }
+
+        .preview-container img {
+            max-width: 100%;
+            max-height: 320px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            background-color: #FFFFFF; /* 画像の実際のサイズ分だけに白背景を適用 */
+            display: block;
+        }
+
+        /* 数値入力エリア */
+        .grid-inputs {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            color: #00c9a7;
+        }
+
+        input[type="number"] {
+            background-color: #00c9a7;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 0px;
+            padding: 16px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            width: 120px;
+            text-align: center;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            opacity: 1;
+        }
+
+        /* ボタン共通 */
+        .btn-primary {
+            background-color: #00c9a7;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 0px;
+            box-shadow: none;
+            font-family: 'Outfit', 'Noto Sans JP', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            padding: 24px 48px;
+            cursor: pointer;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: opacity 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.45;
+            cursor: default;
+        }
+
+        .btn-secondary {
+            background-color: #FFFFFF; /* グレー背景カード上のため白背景に設定 */
+            color: #00c9a7;
+            border: none;
+            border-radius: 0px;
+            box-shadow: none;
+            font-family: 'Outfit', 'Noto Sans JP', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            padding: 24px 48px;
+            cursor: pointer;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: opacity 0.2s ease;
+        }
+
+        .btn-secondary:hover {
+            opacity: 0.8;
+        }
+
+        .btn-item-dl {
+            background-color: #EFEFEF; /* 白背景アイテム上のためグレー背景に設定 */
+            color: #00c9a7;
+            border: none;
+            border-radius: 0px;
+            box-shadow: none;
+            font-family: 'Outfit', 'Noto Sans JP', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            padding: 16px;
+            cursor: pointer;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: opacity 0.2s ease;
+        }
+
+        .btn-item-dl:hover {
+            opacity: 0.8;
+        }
+
+        /* 結果エリア */
+        .result-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .result-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 24px;
+        }
+
+        .result-item {
+            background-color: #FFFFFF;
+            padding: 16px;
+            border: none;
+            border-radius: 0px;
+            box-shadow: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .result-item .img-wrapper {
+            width: 100%;
+            aspect-ratio: 1;
+            background-color: #EFEFEF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .result-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .error-message {
+            color: #00c9a7;
+            font-weight: 700;
+            font-size: 18px;
+            text-align: center;
+            padding: 24px;
+            background-color: #FFFFFF;
+        }
+
+        .actions-group {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .disclaimer {
+            font-size: 13px;
+            color: #00c9a7;
+            text-align: center;
+        }
+
+        /* フッターコンテナ：ページ最下部に配置 */
+        .footer {
+            padding: 24px 0; /* 上下に24pxのゆとりある余白を設け、窮屈さを排除 */
+            text-align: center; /* テキストを中央揃え */
+            background-color: #FFFFFF; /* 背景色（白） */
+            margin-top: auto; /* コンテンツが少ない場合でも画面最下部に自動配置する設定 */
+            width: 100%;
+        }
+
+        /* コピーライトテキスト */
+        .footer__copy {
+            font-family: 'Outfit', 'Noto Sans JP', sans-serif;
+            font-size: 14px; /* 本文より少し小さめのサイズで控えめに配置 */
+            color: #00c9a7; /* ヘッダーやツールと同色のメインカラー */
+            margin: 0; /* ブラウザデフォルトの余白をリセット */
+            letter-spacing: 0.05em; /* 英数字の詰まりを防ぎ、モダンで洗練された印象に */
+        }
+
+        @media (max-width: 767px) {
+            body {
+                padding: 24px 16px 0;
+            }
+
+            .container {
+                margin: 0 auto 32px;
+            }
+
+            .card {
+                padding: 24px;
+            }
+
+            .card:has(> .step-section) {
+                padding: 0;
+            }
+
+            .step-section {
+                padding: 24px;
+            }
+
+            .header-section {
+                margin-bottom: 32px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .subtitle {
+                font-size: 14px;
+            }
+
+            .step-title {
+                font-size: 20px;
+            }
+
+            .btn-primary, .btn-secondary {
+                padding: 18px 32px;
+                font-size: 16px;
+            }
+
+            .grid-inputs {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 16px;
+            }
+
+            .input-group {
+                justify-content: space-between;
+            }
+
+            input[type="number"] {
+                width: 60%;
+            }
+            .result-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+
+            .disclaimer {
+                font-size: 11px;
+            }
+        }
