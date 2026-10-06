@@ -409,8 +409,12 @@
                 width: 60%;
             }
             .result-container {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(var(--mobile-cols, 2), minmax(0, 1fr));
                 gap: 16px;
+            }
+
+            .result-item {
+                min-width: 0;
             }
 
             .disclaimer {

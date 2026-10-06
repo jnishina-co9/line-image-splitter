@@ -2,6 +2,7 @@
         lucide.createIcons();
 
         let splitBlobs = [];
+        let splitRunId = 0;
 
         function getFormattedDate() {
             const now = new Date();
@@ -84,9 +85,13 @@
             splitBlobs.forEach(b => URL.revokeObjectURL(b.url));
             splitBlobs = [];
             document.getElementById('splitZipBtn').style.display = 'none';
+            const runId = ++splitRunId;
+            results.style.maxWidth = `${c * 240 + (c - 1) * 24}px`;
+            results.style.setProperty('--mobile-cols', Math.min(c, 2));
 
             const img = new Image();
             img.onload = () => {
+                if (runId !== splitRunId) return;
                 const w = img.width / c;
                 const h = img.height / r;
                 let count = 0;
@@ -94,16 +99,21 @@
 
                 for (let y = 0; y < r; y++) {
                     for (let x = 0; x < c; x++) {
+                        const index = y * c + x;
+                        const slot = document.createElement('div');
+                        results.appendChild(slot);
+
                         const cvs = document.createElement('canvas');
                         cvs.width = w;
                         cvs.height = h;
                         cvs.getContext('2d').drawImage(img, x * w, y * h, w, h, 0, 0, w, h);
 
                         cvs.toBlob(blob => {
+                            if (runId !== splitRunId) return;
                             count++;
                             const url = URL.createObjectURL(blob);
                             const name = `${dateStr}_${y + 1}-${x + 1}.png`;
-                            splitBlobs.push({ blob: blob, name: name, url: url });
+                            splitBlobs[index] = { blob: blob, name: name, url: url };
 
                             const item = document.createElement('div');
                             item.className = 'result-item';
@@ -124,7 +134,7 @@
                             });
                             item.appendChild(btn);
 
-                            results.appendChild(item);
+                            slot.replaceWith(item);
 
                             // 動的に追加したアイコンをレンダリング
                             lucide.createIcons({ root: item });
@@ -150,6 +160,7 @@
         }
 
         function handleReset() {
+            splitRunId++;
             document.getElementById('splitInput').value = '';
             document.getElementById('fileNameDisplay').textContent = '未選択';
             document.getElementById('previewContainer').style.display = 'none';
