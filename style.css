@@ -71,7 +71,7 @@
         .step-section {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 32px;
             background-color: #EFEFEF;
             padding: 48px;
         }
@@ -397,6 +397,10 @@
 
             .step-section {
                 padding: 24px;
+            }
+
+            .file-drop-area {
+                padding: 48px 16px;
             }
 
             .header-section {
