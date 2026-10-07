@@ -51,15 +51,12 @@
 
         function handleFileChange(event) {
             const file = event.target.files[0];
-            const display = document.getElementById('fileNameDisplay');
             const previewContainer = document.getElementById('previewContainer');
             const previewImg = document.getElementById('selectedImagePreview');
             if (file) {
-                display.textContent = file.name;
                 previewImg.src = URL.createObjectURL(file);
                 previewContainer.style.display = 'flex';
             } else {
-                display.textContent = '未選択';
                 previewImg.src = '';
                 previewContainer.style.display = 'none';
             }
@@ -162,7 +159,6 @@
         function handleReset() {
             splitRunId++;
             document.getElementById('splitInput').value = '';
-            document.getElementById('fileNameDisplay').textContent = '未選択';
             document.getElementById('previewContainer').style.display = 'none';
             document.getElementById('selectedImagePreview').src = '';
             document.getElementById('rows').value = 2;
@@ -180,4 +176,3 @@
             handleReset();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-    

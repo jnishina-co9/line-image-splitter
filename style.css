@@ -132,12 +132,6 @@
             border: 2px dashed #FFFFFF;
         }
 
-        .file-drop-area .file-name {
-            font-size: 14px;
-            opacity: 0.8;
-            margin-top: 8px;
-        }
-
         /* 選択画像プレビューエリア */
         .preview-container {
             width: 100%;
