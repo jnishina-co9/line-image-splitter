@@ -7,7 +7,7 @@
     <title>画像分割ツール</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -72,9 +72,13 @@
                     <button id="resetAndTopBtn" class="btn-secondary" onclick="handleResetAndTop()">
                         <i data-lucide="rotate-ccw"></i> リセットしてトップに戻る
                     </button>
-                    <p class="disclaimer">※ 本ツールはLINEスタンプの審査通過を保証するものではありません。</p>
                 </div>
             </div>
+        </div>
+
+        <!-- フッター上の案内テキスト -->
+        <div class="notice-box">
+            <p class="notice-text"><span><a href="https://creator.line.me/ja/guideline/sticker/" target="_blank" rel="noopener noreferrer">LINE公式制作ガイドライン</a>に基づく仕様です。</span><span>審査通過を保証するものではありません。</span></p>
         </div>
     </div>
 
@@ -83,8 +87,9 @@
 
     <script src="app.js"></script>
 
-    <footer class="footer">
-        <p class="footer__copy">© 2026 深森呼吸</p>
+    <!-- ===== Footer ===== -->
+    <footer class="site-footer">
+        <p class="footer-copy">© 2026 深森呼吸</p>
     </footer>
 </body>
 
